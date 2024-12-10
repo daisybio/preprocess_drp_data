@@ -76,3 +76,4 @@ CCLE_ABSOLUTE_combined_20181227.xlsx, CCLE ABSOLUTE copy number analysis results
 
 We want to process them with [GISTIC2.0](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-4-r41)
 
+## Proteomics

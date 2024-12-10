@@ -538,6 +538,50 @@ def preprocess_sanger_sanger_gex(tpm=True):
     return gex
 
 
+def preprocess_sanger_proteomcis():
+    # read in proteomics dataframe
+    print("Preprocessing proteomics dataframe ...")
+    prot = pd.read_csv("../SangerCellModelPassports/proteomics/protein_expression_table.tsv", sep="\t")
+    control_runs = prot.columns[prot.columns.str.startswith("Control_HEK293T")].tolist()
+    prot = prot.drop(columns=control_runs)
+    prot = prot.set_index("Unnamed: 0")
+    prot = prot.T
+    prot = prot.reset_index(names='cell_line_name')
+    # sort by cell line name
+    prot = prot.sort_values("cell_line_name")
+    # there are 6 replicates per cell line, indicated by .1, .2, …. Remove the .1, .2, …
+    prot["cell_line_name"] = prot["cell_line_name"].str.split(".").str[0]
+    # kick out all cell_line_names starting with Unnamed
+    prot = prot[~prot["cell_line_name"].str.startswith("Unnamed")]
+    renamed = {
+        "C32": "C32 [Human melanoma]",
+        "C3A": "Hep-G2/C3A",
+        "G-292-Clone-A141B1": "G-292 clone A141B1",
+        "HARA": "HARA [Human squamous cell lung carcinoma]",
+        "Hep3B2-1-7": "Hep 3B2.1-7",
+        "HH": "HH [Human lymphoma]",
+        "Hs-633T": "Hs 633.T",
+        "HT55": "HT-55",
+        "JM1": "JM-1",
+        "K2": "K2 [Human melanoma]",
+        "KS-1": "KS-1 [Human glioblastoma]",
+        "ML-1": "ML-1 [Human thyroid carcinoma]",
+        "MS-1": "MS-1 [Human lung carcinoma]",
+        "NOS-1": "NOS-1 [Human osteosarcoma]",
+        "NTERA-2-cl-D1": "NT2-D1",
+        "OMC-1": "OMC-1 [Human cervical carcinoma]",
+        "PC-3_[JPC-3]": "PC-3 [Human lung carcinoma]",
+        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "SAT": "SAT [Human HNSCC]",
+        "TALL-1": "TALL-1 [Human adult T-ALL]",
+        "TK": "TK [Human B-cell lymphoma]",
+        "UWB1": "UWB1.289",
+
+    }
+    prot = preprocess_df(df=prot, cl_col_name="cell_line_name", renamed_dict=renamed)
+    return prot
+
+
 def preprocess_ccle_gex():
     # read in gene expression dataframe
     print("Preprocessing gene expression dataframe ...")
@@ -604,6 +648,27 @@ def preprocess_methylation_ccle():
     }
     met = preprocess_df(df=met, cl_col_name="CELL_LINE", renamed_dict=renamed)
     return met
+
+
+def preprocess_proteomics_ccle():
+    print("Preprocessing CCLE proteomics dataframe ...")
+    prot = pd.read_csv("../CCLE/proteomics/protein_expression_table.tsv", sep="\t")
+    prot = prot.set_index("Gene names")
+    prot = prot.T
+    prot = prot.reset_index(names='cell_line_name')
+    renamed = {
+        "C32": "C32 [Human melanoma]",
+        "CAL-120.1": "CAL-120",
+        "CNI-H1568": "NCI-H1568",
+        "HCC 1806": "HCC1806",
+        "HCC 1954": "HCC1954",
+        "HCT-15.1": "HCT 15",
+        "HT55": "HT-55",
+        "JM1": "JM-1",
+        "SW948.1": "SW948",
+    }
+    prot = preprocess_df(df=prot, cl_col_name="cell_line_name", renamed_dict=renamed)
+    return prot
 
 
 if __name__ == "__main__":
@@ -770,7 +835,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../CCLE/gene_expression/gene_expression_cellosaurus.csv",
     )
-    """
+    
     # methylation
     ccle_met = preprocess_methylation_ccle()
     map_to_cellosaurus(
@@ -781,6 +846,28 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../CCLE/methylation/methylation_cellosaurus.csv",
     )
+    
+    # proteomics
+    ccle_prot = preprocess_proteomics_ccle()
+    map_to_cellosaurus(
+        ccle_prot,
+        cellosaurus_ac_dict,
+        cellosaurus_sy_dict,
+        species_dict,
+        cello_ac_to_id_dict,
+        "../CCLE/proteomics/proteomics_cellosaurus.csv",
+    )
+    """
+    sanger_prot = preprocess_sanger_proteomcis()
+    map_to_cellosaurus(
+        sanger_prot,
+        cellosaurus_ac_dict,
+        cellosaurus_sy_dict,
+        species_dict,
+        cello_ac_to_id_dict,
+        "../SangerCellModelPassports/proteomics/proteomics_cellosaurus.csv",
+    )
+
     """
     # export matched cell lines to csv file
     matched_cell_lines_df = pd.DataFrame.from_dict(matched_cell_lines, orient="index", columns=["cellosaurus_id"])
