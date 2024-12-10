@@ -1,3 +1,43 @@
+# Custom
+CCLE/cnv/CCLE_ABSOLUTE_combined_20181227.xlsx
+CCLE/cnv/segfile_CCLE.txt
+CCLE/gene_expression/ccle_salmon.gene_tpm_cvcl.tsv
+CCLE/gene_expression/gene_expression.csv
+CCLE/gene_expression/salmon.merged.gene_tpm.tsv
+CCLE/methylation/CCLE_RRBS_TSS_CpG_clusters_20180614.txt
+CCLE/methylation/methylation_cellosaurus.csv
+CCLE/methylation/methylation_pre_mapping.csv
+CCLE/response/curve_curator_pEC50_CCLE.csv
+CCLE/response/curve_curator_responses_CCLE.csv
+CCLE/response/response_CCLE.csv
+CCLE/response/response_CTRPv2_curvecurator.tsv
+CCLE/mutationfile_CCLE.txt
+
+GDSC/annotation/cell_line_annotation_gdsc1.csv
+GDSC/annotation/cell_line_annotation_gdsc2.csv
+GDSC/annotation/cell_line_names.csv
+GDSC/annotation/drug_annotation_gdsc1.csv
+GDSC/annotation/drug_annotation_gdsc2.csv
+GDSC/cnv/copy_number_variation_gistic.csv
+GDSC/gene_expression/gene_expression.csv
+GDSC/methylation/F2_METH_CELL_DATA.txt
+GDSC/methylation/methSampleId_2_cosmicIds.xlsx
+GDSC/methylation/methylation.csv
+GDSC/mutation/mutations.csv
+GDSC/response/binarized_gdsc.csv
+GDSC/response/binarized_gdsc_cellosaurus.csv
+GDSC/response/curves_GDSC1.txt
+GDSC/response/curves_GDSC1_cellosaurus.csv
+GDSC/response/curves_GDSC1_cellosaurus_transposed.csv
+GDSC/response/curves_GDSC2.txt
+GDSC/response/curves_GDSC2_cellosaurus.csv
+GDSC/response/curves_GDSC2_cellosaurus_transposed.csv
+GDSC/response/response_GDSC1.csv
+GDSC/response/response_GDSC2.csv
+
+mapping/cellosaurus_01_2024.csv.zip
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -159,4 +199,4 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+.idea/
