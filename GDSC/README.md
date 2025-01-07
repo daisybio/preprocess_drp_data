@@ -60,6 +60,21 @@ Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_c
 From the [GDSC Data Portal](https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources/Home.html),
 the methylation data (F2_METH_CELL_DATA, Pre-Processed beta values for all CpG islands across all the cell-line).
 
+The data was transformed with the following code: 
+```{python}
+import pandas as pd
+met = pd.read_csv('GDSC/methylation/F2_METH_CELL_DATA.txt', sep='\t')
+met = met.set_index("Unnamed: 0")
+met = met.T
+
+annotation = pd.read_excel('GDSC/annotation/methSampleId_2_cosmicIds.xlsx')
+anno_dict = {f'{row["Sentrix_ID"]}_{row["Sentrix_Position"]}': row["Sample_Name"] for index, row in annotation.iterrows()}
+met["CELL_LINE_NAME"] = [anno_dict.get(id) for id in met.index]
+met = met.set_index("CELL_LINE_NAME")
+met.to_csv('GDSC/methylation/reprocessed_gdsc_met.csv')
+```
+Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
+
 ## Copy number variation
 
 The data was downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
@@ -68,12 +83,13 @@ Copy Number Data -> Copy Number (SNP6) -> PICNIC absolute copy numbers and GISTI
 The data was transformed with the following code:
 ```{python}
 import pandas as pd
-cnv_sanger = pd.read_csv('SangerCellModelPassports/cnv/cnv_20191101/cnv_gistic_20191101.csv', skiprows=[0,2])
+cnv_sanger = pd.read_csv('SangerCellModelPassports/cnv/cnv_gistic_20191101.csv', skiprows=[0,2])
 cnv_sanger = cnv_sanger.drop(columns=['model_name'])
 cnv_sanger = cnv_sanger.set_index("Unnamed: 1")
 cnv_sanger = cnv_sanger.T
 cnv_sanger.index.name = 'CELL_LINE_NAME'
 cnv_sanger = cnv_sanger.reset_index()
+cnv_sanger.to_csv('GDSC/cnv/copy_number_variation_gistic.csv')
 ```
 
 Then, it was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py

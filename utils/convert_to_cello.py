@@ -150,24 +150,24 @@ def collapse_ln_ic50s(values):
 def preprocess_gex_gdsc():
     # read in gene expression dataframe
     print("Preprocessing gene expression dataframe ...")
-    gex = pd.read_csv("../GDSC/gene_expression/gene_expression.csv")
+    gex = pd.read_csv("../GDSC/gene_expression/reprocessed_gdsc_gex.csv", index_col=0)
     renamed = {
-        "JM1": "JM-1",
-        "HT55": "HT-55",
-        "K2": "K2 [Human melanoma]",
-        "MS-1": "MS-1 [Human lung carcinoma]",
-        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
-        "C32": "C32 [Human melanoma]",
         "786-0": "786-O",
-        "PC-3 [JPC-3]": "PC-3",
-        "KS-1": "KS-1 [Human glioblastoma]",
+        "C32": "C32 [Human melanoma]",
         "G-292 Clone A141B1": "G-292 clone A141B1",
-        "ML-1": "ML-1 [Human thyroid carcinoma]",
-        "SAT": "SAT [Human HNSCC]",
-        "HH": "HH [Human lymphoma]",
         "HARA": "HARA [Human squamous cell lung carcinoma]",
-        "TK": "TK [Human B-cell lymphoma]",
+        "HH": "HH [Human lymphoma]",
+        "HT55": "HT-55",
+        "JM1": "JM-1",
+        "K2": "K2 [Human melanoma]",
+        "KS-1": "KS-1 [Human glioblastoma]",
+        "ML-1": "ML-1 [Human thyroid carcinoma]",
+        "MS-1": "MS-1 [Human lung carcinoma]",
         "NOS-1": "NOS-1 [Human osteosarcoma]",
+        "PC-3 [JPC-3]": "PC-3",
+        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "SAT": "SAT [Human HNSCC]",
+        "TK": "TK [Human B-cell lymphoma]",
     }
     gex = preprocess_df(df=gex, cl_col_name="CELL_LINE_NAME", renamed_dict=renamed)
     return gex
@@ -176,7 +176,7 @@ def preprocess_gex_gdsc():
 def preprocess_methylation_gdsc():
     # read in methylation dataframe
     print("Preprocessing methylation dataframe ...")
-    methylation = pd.read_csv("../GDSC/methylation/methylation.csv")
+    methylation = pd.read_csv("../GDSC/methylation/reprocessed_gdsc_met.csv")
     renamed = {
         "JM1": "JM-1",
         "HT55": "HT-55",
@@ -724,6 +724,7 @@ if __name__ == "__main__":
 
     # GDSC1
     # map gene expression cell line names to cellosaurus IDs
+    """
     gex = preprocess_gex_gdsc()
     map_to_cellosaurus(
         gex,
@@ -733,6 +734,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/gene_expression/gene_expression_cellosaurus.csv",
     )
+    
     # map methylation cell line names to cellosaurus IDs
     met = preprocess_methylation_gdsc()
     map_to_cellosaurus(
@@ -743,6 +745,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/methylation/methylation_cellosaurus.csv",
     )
+    
     # map mutation cell line names to cellosaurus IDs
     mut = preprocess_mutation_gdsc()
     map_to_cellosaurus(
@@ -753,6 +756,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/mutation/mutations_cellosaurus.csv",
     )
+    """
     # map copy number variation cell line names to cellosaurus IDs
     cnv = preprocess_cnv_gdsc()
     map_to_cellosaurus(
@@ -763,6 +767,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/cnv/copy_number_variation_gistic_cellosaurus.csv",
     )
+    """
     # map binarized drug response cell line names to cellosaurus IDs
     drp_bin = preprocess_binarized_drp_gdsc()
     map_to_cellosaurus(
@@ -932,3 +937,4 @@ if __name__ == "__main__":
     # export renamed cell lines to csv file
     renamed_cell_lines_df = pd.DataFrame.from_dict(renamed_cell_lines, orient="index", columns=["cell_line_name"])
     renamed_cell_lines_df.to_csv("../mapping/renamed_cell_lines.csv")
+    """
