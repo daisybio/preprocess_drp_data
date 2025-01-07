@@ -62,6 +62,7 @@ The mutation data was downloaded from [DepMap](https://depmap.org/portal/data_pa
 It was transformed into the appropriate format with [process_mutation.R](mutation/process_mutation.R).
 
 ## Methylation
+
 From [DepMap](https://depmap.org/portal/data_page/?tab=allData): Methylation (RRBS), the data for the promoter CpG clusters was
 downloaded (CCLE_RRBS_TSS_CpG_clusters_20180614.txt). 
 
@@ -71,9 +72,44 @@ most between the two datasets.
 
 ## Copy number variation: GISTIC2.0
 
-The copy number variation data can be downloaded from [DepMap](https://depmap.org/portal/data_page/?tab=allData): 
-CCLE_ABSOLUTE_combined_20181227.xlsx, CCLE ABSOLUTE copy number analysis results. 
+The data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads):
+Copy Number Data -> Copy Number (SNP6) -> PICNIC absolute copy numbers and GISTIC scores derived from Affymetrix SNP6.0 array data
+(see GDSC part).
 
-We want to process them with [GISTIC2.0](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-4-r41)
+Alternatively, the copy number variation data can be downloaded from [DepMap](https://depmap.org/portal/data_page/?tab=allData): 
+CCLE_copynumber_2013-12-03.seg.txt. 
+
+We want to process them with [GISTIC2.0](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-4-r41) using 
+the [GenePattern server](https://cloud.genepattern.org/gp/pages/index.jsf). 
+
+We used the Human Hg19 reference genome and uploaded the segmentation file and used the default settings. The results were 
+written to all_thresholded.by_genes.txt.
+
+The data was preprocessed with the following script:
+```{python}
+import pandas as pd
+cnv = pd.read_csv('all_thresholded.by_genes.txt', sep='\t')
+cnv = cnv.set_index("Gene Symbol")
+cnv = cnv.drop(columns=['Locus ID', 'Cytoband'])
+cnv = cnv.T
+cnv.index.name = 'CELL_LINE_NAME'
+cnv = cnv.reset_index()
+cnv['CELL_LINE_NAME'] = cnv['CELL_LINE_NAME'].str.split('_').str[0]
+cnv.to_csv('reprocessed_cnv.csv', index=False)
+```
+
+The cell line IDs were mapped to Cellosaurus IDs with the code in [utils/convert_to_cello.py](utils/convert_to_cello.py).
+
+### Overlap between GISTIC dataset from Sanger & reprocessed dataset from DepMap
+
+* In the Sanger Dataset, CNV data was measured for **978** cell lines and **20,669** genes.
+* From the DepMap dataset, we get **1,042** cell lines (**1,036 unique**) and **23,109** genes. 
+* From those, only **637** cell lines and **19,276** genes are overlapping.
+
+Comparison: 
+* Gene-wise correlation is very bad: Mean -0.041, SD 0.049
+* Out of the 637 cell lines, on average, only 235.37±20.89 have the same value (~37%) per gene.
 
 ## Proteomics
+
+
