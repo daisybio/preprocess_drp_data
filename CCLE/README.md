@@ -1,5 +1,12 @@
 # CCLE Data
 
+1. [Transcriptomics](#transcriptomics)
+2. [Mutations](#mutations)
+3. [Methylation](#methylation)
+4. [Copy number variation](#copy-number-variation-gistic20)
+5. [Proteomics](#proteomics)
+6. [Response](#response)
+
 ## Transcriptomics
 
 ### Processed data
@@ -59,7 +66,10 @@ For prediction, we want to use the gene-level TPMs in ccle_salmon.gene_tpm_cvcl.
 ## Mutations
 
 The mutation data was downloaded from [DepMap](https://depmap.org/portal/data_page/?tab=allData): Release 22Q2, file: CCLE_mutations.csv. 
-It was transformed into the appropriate format with [process_mutation.R](mutation/process_mutation.R).
+It was transformed into the appropriate format with [process_mutation.R](mutation/process_mutation.R) to exclude 
+**intronic, silent**, and mutations in **5'/3'UTR**.
+
+Alternatively, the SangerCellModelPassports data can be used. For this, see the GDSC section. 
 
 ## Methylation
 
@@ -112,4 +122,4 @@ Comparison:
 
 ## Proteomics
 
-
+## Response

@@ -1,6 +1,13 @@
 # GDSC
 
-## Gene expression
+1. [Transcriptomics](#transcriptomics)
+2. [Mutations](#mutations)
+3. [Methylation](#methylation)
+4. [Copy number variation](#copy-number-variation)
+5. [Proteomics](#proteomics)
+6. [Response](#response)
+
+## Transcriptomics
 From the [GDSC Data Portal](https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources/Home.html),
 the gene expression data (RMA normalised expression data for cell-lines, Cell_line_RMA_proc_basalExp.txt) and two 
 annotations (methSampleId_2_cosmicIds.xlsx, Mapping between cell-line COSMIC identifiers and cell-line methylation data identifiers + 
@@ -54,6 +61,52 @@ gdsc_gex.to_csv('GDSC/gene_expression/reprocessed_gdsc_gex.csv')
 
 Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
 
+## Mutations
+
+The data was downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads):
+Mutation Data -> Mutations All. 
+
+The data was filtered for **only coding** mutations which are **not silent** and then transformed with the following code:
+```{python} 
+import pandas as pd
+mut = pd.read_csv('SangerCellModelPassports/mutation/mutations_all_20230202.csv')
+# filter for coding mutations 
+mut = mut[mut['coding'] == True]
+# filter out silent mutations
+mut = mut[mut['effect'] != 'silent']
+# filter for 'gene_symbol' and 'model_id', introduce a new column: 'mutated' which is True everywhere
+mut = mut[['gene_symbol', 'model_id']]
+mut['mutated'] = True
+# mapping for sanger
+cellosaurus = pd.read_csv("mapping/cellosaurus_01_2024.csv")
+cellosaurus = cellosaurus.fillna("")
+cellosaurus_sid_dict = {}
+cellosaurus_id_dict = {}
+for index, row in cellosaurus.iterrows():
+    organism = row["OX"]
+    if 'Human' not in organism:
+        continue
+    if "Cell_Model_Passport" in row["DR"]:
+        # split DR column by ',', iterate until you encounter an ID starting with SIDM
+        for element in row["DR"].split(","):
+            if element.startswith("SIDM"):
+                cellosaurus_sid_dict[element] = row["AC"]
+                cellosaurus_id_dict[element] = row["ID"]
+    else:
+        continue
+
+mut['CELL_LINE_NAME'] = [cellosaurus_id_dict.get(model_id) for model_id in mut['model_id']]
+mut['cellosaurus_id'] = [cellosaurus_sid_dict.get(model_id) for model_id in mut['model_id']]
+mut = mut.drop(columns=['model_id'])
+mut = mut.dropna(subset=['CELL_LINE_NAME'])
+mut = mut.drop_duplicates()
+mut = mut.set_index(["cellosaurus_id", "CELL_LINE_NAME"])
+# pivot the table
+mut = mut.pivot(columns='gene_symbol', values='mutated')
+mut = mut.fillna(False)
+mut = mut.reset_index()
+mut.to_csv('SangerCellModelPassports/mutation/mutations_cellosaurus.csv', index=False)
+```
 
 ## Methylation
 
@@ -93,3 +146,10 @@ cnv_sanger.to_csv('GDSC/cnv/copy_number_variation_gistic.csv')
 ```
 
 Then, it was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
+
+## Proteomics
+
+
+
+## Response
+
