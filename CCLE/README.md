@@ -98,27 +98,28 @@ written to all_thresholded.by_genes.txt.
 The data was preprocessed with the following script:
 ```{python}
 import pandas as pd
-cnv = pd.read_csv('all_thresholded.by_genes.txt', sep='\t')
+cnv = pd.read_csv('CCLE/cnv/all_thresholded.by_genes.txt', sep='\t')
 cnv = cnv.set_index("Gene Symbol")
 cnv = cnv.drop(columns=['Locus ID', 'Cytoband'])
 cnv = cnv.T
 cnv.index.name = 'CELL_LINE_NAME'
 cnv = cnv.reset_index()
 cnv['CELL_LINE_NAME'] = cnv['CELL_LINE_NAME'].str.split('_').str[0]
-cnv.to_csv('reprocessed_cnv.csv', index=False)
+cnv.to_csv('CCLE/cnv/reprocessed_cnv.csv', index=False)
 ```
 
-The cell line IDs were mapped to Cellosaurus IDs with the code in [utils/convert_to_cello.py](utils/convert_to_cello.py).
+The cell line IDs were mapped to Cellosaurus IDs with the code in [utils/convert_to_cello.py](utils/convert_to_cello.py) to produce 
+``cnv_cellosaurus.csv``.
 
 ### Overlap between GISTIC dataset from Sanger & reprocessed dataset from DepMap
 
 * In the Sanger Dataset, CNV data was measured for **978** cell lines and **20,669** genes.
-* From the DepMap dataset, we get **1,042** cell lines (**1,036 unique**) and **23,109** genes. 
-* From those, only **637** cell lines and **19,276** genes are overlapping.
+* From the DepMap dataset, we get **1,040** cell lines (**1,036 unique**) and **23,109** genes. 
+* From those, only **639** cell lines and **19,276** genes are overlapping.
 
 Comparison: 
-* Gene-wise correlation is very bad: Mean -0.041, SD 0.049
-* Out of the 637 cell lines, on average, only 235.37±20.89 have the same value (~37%) per gene.
+* Gene-wise correlation is alright: **0.771±0.067**
+* Out of the 637 cell lines, on average, only 235.85±21.5 have the same value (~37%) per gene.
 
 ## Proteomics
 

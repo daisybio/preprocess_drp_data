@@ -245,7 +245,7 @@ def preprocess_mutation_gdsc():
 def preprocess_cnv_gdsc():
     # read in copy number variation dataframe
     print("Preprocessing copy number variation dataframe ...")
-    cnv = pd.read_csv("../GDSC/cnv/copy_number_variation_gistic.csv")
+    cnv = pd.read_csv("../GDSC/cnv/copy_number_variation_gistic.csv", index_col=0)
     renamed = {
         "JM1": "JM-1",
         "HT55": "HT-55",
@@ -722,9 +722,8 @@ if __name__ == "__main__":
     # create cellosaurus dictionary
     cellosaurus_ac_dict, cellosaurus_sy_dict, species_dict, cello_ac_to_id_dict = create_cl_dict(cellosaurus)
 
-    # GDSC1
+    # GDSC
     # map gene expression cell line names to cellosaurus IDs
-    """
     gex = preprocess_gex_gdsc()
     map_to_cellosaurus(
         gex,
@@ -745,18 +744,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/methylation/methylation_cellosaurus.csv",
     )
-    
-    # map mutation cell line names to cellosaurus IDs
-    mut = preprocess_mutation_gdsc()
-    map_to_cellosaurus(
-        mut,
-        cellosaurus_ac_dict,
-        cellosaurus_sy_dict,
-        species_dict,
-        cello_ac_to_id_dict,
-        "../GDSC/mutation/mutations_cellosaurus.csv",
-    )
-    """
+
     # map copy number variation cell line names to cellosaurus IDs
     cnv = preprocess_cnv_gdsc()
     map_to_cellosaurus(
@@ -767,7 +755,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/cnv/copy_number_variation_gistic_cellosaurus.csv",
     )
-    """
+
     # map binarized drug response cell line names to cellosaurus IDs
     drp_bin = preprocess_binarized_drp_gdsc()
     map_to_cellosaurus(
@@ -937,4 +925,3 @@ if __name__ == "__main__":
     # export renamed cell lines to csv file
     renamed_cell_lines_df = pd.DataFrame.from_dict(renamed_cell_lines, orient="index", columns=["cell_line_name"])
     renamed_cell_lines_df.to_csv("../mapping/renamed_cell_lines.csv")
-    """
