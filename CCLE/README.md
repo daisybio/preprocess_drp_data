@@ -123,4 +123,14 @@ Comparison:
 
 ## Proteomics
 
+We can also use the DIA-MS proteomics data from SangerCellModelPassports ([Gonçalves et al. (2021)](https://www.sciencedirect.com/science/article/pii/S1535610822002744)) 
+for CCLE (see GDSC section).
+
+Alternatively, there was a CCLE proteomics TMT experiment done by [Nusinow et al.](https://www.cell.com/cell/fulltext/S0092-8674(19)31385-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867419313856%3Fshowall%3Dtrue).
+It contains 375 cell lines with no replicates. 
+The processed dataset is available at [DepMap](https://depmap.org/portal/data_page/?tab=allData) or at [https://gygi.med.harvard.edu/publications/ccle](https://gygi.med.harvard.edu/publications/ccle)
+which is currently both down.
+
+We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in utils/convert_to_cello.py.
+
 ## Response

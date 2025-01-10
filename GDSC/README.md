@@ -149,7 +149,25 @@ Then, it was mapped to cellosaurus IDs with the code in utils/convert_to_cello.p
 
 ## Proteomics
 
+A DIA screen was done by [Gonçalves et al. (2021)](https://www.sciencedirect.com/science/article/pii/S1535610822002744).
+Their raw data is located in the [PRIDE: PXD030304](https://www.ebi.ac.uk/pride/archive/projects/PXD030304).
+It contains 949 cell lines with 3-10 replicates. 
+
+It was reprocessed >#TODO insert information<
+and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+
+Alternatively, processed data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
+Proteomics Data (DIA-MS) (averaged intensities and averaged z-scores over the replicates).
 
 
 ## Response
+
+There are two response datasets available from https://www.cancerrxgene.org/downloads/bulk_download:
+
+* GDSC1: GDSC1_fitted_dose_response_27Oct23.xlsx
+* GDSC2: GDSC2_fitted_dose_response_27Oct23.xlsx
+
+Those were mapped to cellosaurus IDs with the code in utils/convert_to_cello.py. 
+
+Additionally, the raw data was reprocessed with CurveCurator. The raw data can be obtained from the same website.
 
