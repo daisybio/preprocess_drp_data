@@ -184,7 +184,8 @@ df <- diann_load('q_1_percent.tsv')
 protein.norm <- diann_maxlfq(df, group.header="Protein.Ids", id.header = "Precursor.Id", quantity.header = "Precursor.Normalised")
 write.csv(protein.norm, "protein_matrix_maxlfq_diann-normalised.tsv")
 ```
-The header columns rawfiles were mapped to their corresponding cell lines annotations with
+The header columns rawfiles were mapped to their corresponding cell lines annotations with the supplemental table S1 from
+the paper. 
 ```{python}
 import pandas as pd
 normalized_file_df = pd.read_csv('protein_matrix_maxlfq_diann-normalised.csv')
@@ -195,27 +196,8 @@ mapping_df_dic = mapping_df[['Automatic_MS_filename','Cell_line']].set_index('Au
 normalized_file_df.columns = normalized_file_df.columns.map(mapping_df_dic)
 normalized_file_df.to_csv('mapped_protein_matrix_maxlfq_diann-normalised.csv',index=False)
 ```
-Finally, iBAQ was calculated with
-```{python}
-import pandas as pd
-ibaq_mapping_df = pd.read_csv('ibaq_mapping_df.csv')
-max_lfq_df = pd.read_csv('protein_matrix_maxlfq_diann-normalised.csv')
-max_lfq_df = max_lfq_df.set_index('Unnamed: 0')
-merged_df = max_lfq_df.merge(ibaq_mapping_df[['uniprot_id',     'max_num_peptide']],right_on='uniprot_id',left_index=True)
-merged_df = merged_df.loc[:,~merged_df.columns.str.contains('control|Control|Unnamed:')]
-columns_list = list(merged_df.columns[~merged_df.columns.str.contains('uniprot_id|max_num_peptide')])
-max_lfq_df = merged_df[columns_list]
-pseudo_ibaq_df = max_lfq_df.div(merged_df['max_num_peptide'], axis=0)
-#
-max_lfq_df['uniprot_id'] = merged_df['uniprot_id']
-max_lfq_df['num_peptides'] = merged_df['max_num_peptide']
-pseudo_ibaq_df['uniprot_id'] = merged_df['uniprot_id']
-#
-max_lfq_df.to_csv('max_lfq_df_for_PrDB.csv')
-pseudo_ibaq_df.to_csv('ibaq_df_for_PrDB.csv')
-```
 
-and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+The protein expression table was made with [sanger_procan_fp.ipynb](proteomics/sanger_procan_fp.ipynb) and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
 Alternatively, processed data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
 Proteomics Data (DIA-MS) (averaged intensities and averaged z-scores over the replicates).
