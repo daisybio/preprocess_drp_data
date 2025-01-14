@@ -153,7 +153,68 @@ A DIA screen was done by [Gonçalves et al. (2021)](https://www.sciencedirect.co
 Their raw data is located in the [PRIDE: PXD030304](https://www.ebi.ac.uk/pride/archive/projects/PXD030304).
 It contains 949 cell lines with 3-10 replicates. 
 
-It was reprocessed >#TODO insert information<
+From this link, the table `ProCan-DepMapSanger_DIANN_output.tsv`(221 Gb) was downloaded. 
+
+It was first filtered for FDR: 
+```{python}
+import pandas as pd
+chunks = pd.read_csv('ProCan-DepMapSanger_DIANN_output.tsv', chunksize=1000000,sep='\t')
+for i,df in enumerate(chunks):
+    df2 = df[(df['Global.Q.Value'] <= 0.01) & (df['Proteotypic'] == 1)]
+    if len(df2):
+        df2.to_csv(f'./chunks/df{i}.tsv',index=False,sep='\t')
+```
+These chunks were concatenated:
+```{bash}
+head -n 1  df0.tsv > ../q_1_percent.tsv
+for file in $(ls *.tsv)
+do
+                echo $file
+                cat $file|tail -n +2 >>../q_1_percent.tsv
+done
+```
+Then, the max. LFQ was calculated with the diann R package
+```{R}
+install.packages("devtools")
+library(devtools)
+install_github("https://github.com/vdemichev/diann-rpackage")
+library(diann)
+
+df <- diann_load('q_1_percent.tsv')
+protein.norm <- diann_maxlfq(df, group.header="Protein.Ids", id.header = "Precursor.Id", quantity.header = "Precursor.Normalised")
+write.csv(protein.norm, "protein_matrix_maxlfq_diann-normalised.tsv")
+```
+The header columns rawfiles were mapped to their corresponding cell lines annotations with
+```{python}
+import pandas as pd
+normalized_file_df = pd.read_csv('protein_matrix_maxlfq_diann-normalised.csv')
+normalized_file_df.columns = normalized_file_df.columns.str.replace('./','')
+normalized_file_df.columns = normalized_file_df.columns.str.replace('.dia','')
+mapping_df = pd.read_excel('mapping_Data.xlsx',sheet_name='Replicate level sample info',skiprows=1)
+mapping_df_dic = mapping_df[['Automatic_MS_filename','Cell_line']].set_index('Automatic_MS_filename')['Cell_line'].to_dict()
+normalized_file_df.columns = normalized_file_df.columns.map(mapping_df_dic)
+normalized_file_df.to_csv('mapped_protein_matrix_maxlfq_diann-normalised.csv',index=False)
+```
+Finally, iBAQ was calculated with
+```{python}
+import pandas as pd
+ibaq_mapping_df = pd.read_csv('ibaq_mapping_df.csv')
+max_lfq_df = pd.read_csv('protein_matrix_maxlfq_diann-normalised.csv')
+max_lfq_df = max_lfq_df.set_index('Unnamed: 0')
+merged_df = max_lfq_df.merge(ibaq_mapping_df[['uniprot_id',     'max_num_peptide']],right_on='uniprot_id',left_index=True)
+merged_df = merged_df.loc[:,~merged_df.columns.str.contains('control|Control|Unnamed:')]
+columns_list = list(merged_df.columns[~merged_df.columns.str.contains('uniprot_id|max_num_peptide')])
+max_lfq_df = merged_df[columns_list]
+pseudo_ibaq_df = max_lfq_df.div(merged_df['max_num_peptide'], axis=0)
+#
+max_lfq_df['uniprot_id'] = merged_df['uniprot_id']
+max_lfq_df['num_peptides'] = merged_df['max_num_peptide']
+pseudo_ibaq_df['uniprot_id'] = merged_df['uniprot_id']
+#
+max_lfq_df.to_csv('max_lfq_df_for_PrDB.csv')
+pseudo_ibaq_df.to_csv('ibaq_df_for_PrDB.csv')
+```
+
 and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
 Alternatively, processed data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
