@@ -133,3 +133,7 @@ The processed dataset is available at [DepMap](https://depmap.org/portal/data_pa
 We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
 ## Response
+
+There is an assay by the Broad Institute/CCLE that only contains 24 drugs. It can be downloaded from DepMap (Pharmacological Profiling Files) # TODO which one is the right one? All of them have different values. 
+
+The CTRPv2 screen is larger (907 cell lines, 545 drugs). It can either be downloaded from DepMap (CTRP CTD^2 Files) or from https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/. 
