@@ -163,8 +163,7 @@ This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
 
 Alternatively, there was a CCLE proteomics TMT experiment done by [Nusinow et al.](https://www.cell.com/cell/fulltext/S0092-8674(19)31385-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867419313856%3Fshowall%3Dtrue).
 It contains 375 cell lines with no replicates. 
-The processed dataset is available at [DepMap](https://depmap.org/portal/data_page/?tab=allData) or at [https://gygi.med.harvard.edu/publications/ccle](https://gygi.med.harvard.edu/publications/ccle)
-which is currently both down.
+The processed dataset is available at [DepMap](https://depmap.org/portal/data_page/?tab=allData) or at [https://gygi.med.harvard.edu/publications/ccle](https://gygi.med.harvard.edu/publications/ccle). The raw data is at [MassIVE MSV000085836](https://massive.ucsd.edu/ProteoSAFe/dataset.jsp?task=02cd1b6a7c674f3ebdbed300b5d9aa57).
 
 We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
@@ -173,8 +172,9 @@ We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in
 The viability data was downloaded from the Supplementary Material (NIHMS361223-supplement-4.xlsx) 
 of [Barretina et al. (2012)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3320027/#S2).
 
-It was reprocessed with CurveCurator using: [00_preprocess_raw_for_curvecurator.ipynb](response%2F00_preprocess_raw_for_curvecurator.ipynb), [01_run_curvecurator.ipynb](response%2F01_run_curvecurator.ipynb).
+It was reprocessed with CurveCurator.
 
+The CTRPv2 screen is larger (907 cell lines, 545 drugs). It can either be downloaded from DepMap (CTRP CTD^2 Files) or from https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/. 
 
 ## Gene lists
 
