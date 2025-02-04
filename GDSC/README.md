@@ -59,7 +59,9 @@ gdsc_gex.index.name = 'CELL_LINE_NAME'
 gdsc_gex.to_csv('GDSC/gene_expression/reprocessed_gdsc_gex.csv')
 ```
 
-Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
+Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+This `gene_expression_cellosaurus.csv` is currently the gene expression file in the **Zenodo** 
+for GDSC1 and GDSC2.
 
 ## Mutations
 
@@ -108,6 +110,8 @@ mut = mut.reset_index()
 mut.to_csv('SangerCellModelPassports/mutation/mutations_cellosaurus.csv', index=False)
 ```
 
+This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE** as `mutations.csv`.
+
 ## Methylation
 
 From the [GDSC Data Portal](https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources/Home.html),
@@ -126,7 +130,8 @@ met["CELL_LINE_NAME"] = [anno_dict.get(id) for id in met.index]
 met = met.set_index("CELL_LINE_NAME")
 met.to_csv('GDSC/methylation/reprocessed_gdsc_met.csv')
 ```
-Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
+Then, the data was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+It is now available in the Zenodo as **GDSC[1,2]/methylation.csv**.
 
 ## Copy number variation
 
@@ -146,6 +151,8 @@ cnv_sanger.to_csv('GDSC/cnv/copy_number_variation_gistic.csv')
 ```
 
 Then, it was mapped to cellosaurus IDs with the code in utils/convert_to_cello.py
+
+This data can also be used for predicting CCLE (**currently in Zenodo for GDSC1, GDSC2, and CCLE**).
 
 ## Proteomics
 
@@ -198,6 +205,8 @@ normalized_file_df.to_csv('mapped_protein_matrix_maxlfq_diann-normalised.csv',in
 ```
 
 The protein expression table was made with [sanger_procan_fp.ipynb](proteomics/sanger_procan_fp.ipynb) and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+
+This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
 
 Alternatively, processed data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
 Proteomics Data (DIA-MS) (averaged intensities and averaged z-scores over the replicates).

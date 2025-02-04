@@ -6,6 +6,8 @@
 4. [Copy number variation](#copy-number-variation-gistic20)
 5. [Proteomics](#proteomics)
 6. [Response](#response)
+7. [Gene lists](#gene-lists)
+8. [Drug fingerprints](#drug-fingerprints)
 
 ## Transcriptomics
 
@@ -62,6 +64,32 @@ The salmon summary files got overwritten, so I ran the nf-core scripts to produc
 Here, I also provided the correct Cellosaurus cell line names instead of the SRA Run Identifiers.
 
 For prediction, we want to use the gene-level TPMs in ccle_salmon.gene_tpm_cvcl.tsv. 
+It was postprocessed with
+```{python}
+import pandas as pd
+
+cellosaurus = pd.read_csv("mapping/cellosaurus_01_2024.csv")
+cellosaurus = cellosaurus.fillna("")
+id_to_ac_dict = dict(zip(cellosaurus["AC"], cellosaurus["ID"]))
+
+gex = pd.read_csv("CCLE/gene_expression/ccle_salmon.gene_tpm_cvcl.tsv", sep="\t")
+# map ensg to gene symbol
+mapping = pd.read_csv("CCLE/gene_expression/ensg_to_name.csv")
+mapping_dict = dict(zip(mapping["initial_alias"], mapping["name"]))
+gex["gene_name"] = [mapping_dict.get(gene_id) for gene_id in gex["gene_id"]]
+gex = gex.dropna(subset=["gene_name"])
+gex = gex.set_index("gene_name")
+gex = gex.drop(columns=["gene_id"])
+gex = gex.T
+# map cell line names to cellosaurus IDs
+gex["cell_line_name"] = [id_to_ac_dict.get(cell_line_name) for cell_line_name in gex.index]
+gex = gex.reset_index()
+gex = gex.rename(columns={"index": "cellosaurus_id"})
+gex = gex.set_index(["cellosaurus_id", "cell_line_name"])
+gex.to_csv("CCLE/gene_expression/salmon_gene_tpms.csv")
+```
+
+This **salmon_gene_tpms.csv** file is currently the file in the Zenodo **CCLE/gene_expression.csv**.
 
 ## Mutations
 
@@ -70,6 +98,7 @@ It was transformed into the appropriate format with [process_mutation.R](mutatio
 **intronic, silent**, and mutations in **5'/3'UTR**.
 
 Alternatively, the SangerCellModelPassports data can be used. For this, see the GDSC section. 
+This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
 
 ## Methylation
 
@@ -80,11 +109,15 @@ This was preprocessed with [preprocess_methylation.R](methylation/preprocess_met
 were matched to the ones from GDSC such that they share their variables. This was done by finding the regions that overlap 
 most between the two datasets.
 
+This was postprocessed in convert_to_cello.py to map the cell line names to Cellosaurus IDs.
+It is now available in the Zenodo as **CCLE/methylation.csv**.
+
 ## Copy number variation: GISTIC2.0
 
 The data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads):
 Copy Number Data -> Copy Number (SNP6) -> PICNIC absolute copy numbers and GISTIC scores derived from Affymetrix SNP6.0 array data
 (see GDSC part).
+This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
 
 Alternatively, the copy number variation data can be downloaded from [DepMap](https://depmap.org/portal/data_page/?tab=allData): 
 CCLE_copynumber_2013-12-03.seg.txt. 
@@ -126,6 +159,8 @@ Comparison:
 We can also use the DIA-MS proteomics data from SangerCellModelPassports ([Gonçalves et al. (2021)](https://www.sciencedirect.com/science/article/pii/S1535610822002744)) 
 for CCLE (see GDSC section).
 
+This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
+
 Alternatively, there was a CCLE proteomics TMT experiment done by [Nusinow et al.](https://www.cell.com/cell/fulltext/S0092-8674(19)31385-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867419313856%3Fshowall%3Dtrue).
 It contains 375 cell lines with no replicates. 
 The processed dataset is available at [DepMap](https://depmap.org/portal/data_page/?tab=allData) or at [https://gygi.med.harvard.edu/publications/ccle](https://gygi.med.harvard.edu/publications/ccle)
@@ -134,3 +169,14 @@ which is currently both down.
 We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
 ## Response
+
+The viability data was downloaded from the Supplementary Material (NIHMS361223-supplement-4.xlsx) 
+of [Barretina et al. (2012)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3320027/#S2).
+
+It was reprocessed with CurveCurator using: [00_preprocess_raw_for_curvecurator.ipynb](response%2F00_preprocess_raw_for_curvecurator.ipynb), [01_run_curvecurator.ipynb](response%2F01_run_curvecurator.ipynb).
+
+
+## Gene lists
+
+## Drug fingerprints
+
