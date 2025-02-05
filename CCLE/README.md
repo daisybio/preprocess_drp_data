@@ -172,9 +172,14 @@ We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in
 The viability data was downloaded from the Supplementary Material (NIHMS361223-supplement-4.xlsx) 
 of [Barretina et al. (2012)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3320027/#S2).
 
-It was reprocessed with CurveCurator.
+It was reprocessed with CurveCurator: [CCLE_preprocess_raw_and_run_curvecurator.ipynb](response%2FCCLE_preprocess_raw_and_run_curvecurator.ipynb).
+The data was filtered such that all pEC50s lie in the measured range. The resulting file `CCLE.csv` was uploaded to Zenodo.
 
-The CTRPv2 screen is larger (907 cell lines, 545 drugs). It can either be downloaded from DepMap (CTRP CTD^2 Files) or from https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/. 
+The CTRP screens are larger:
+- CTRPv1: 
+- CTRPv2: 907 cell lines, 545 drugs. 
+
+
 
 ## Gene lists
 
