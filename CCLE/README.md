@@ -172,6 +172,18 @@ We obtained it >#TODO somehow< and mapped it to cellosaurus IDs with the code in
 The viability data was downloaded from the Supplementary Material (NIHMS361223-supplement-4.xlsx) 
 of [Barretina et al. (2012)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3320027/#S2).
 
+The unmodified version was obtained with
+```{python}
+import pandas as pd
+import numpy as np
+raw_df = pd.read_excel('response/NIHMS361223-supplement-4.xlsx', sheet_name=11, skiprows=2)
+raw_df['LN_IC50'] = np.log(raw_df['IC50 (µM)'])
+raw_df.rename(columns={'Primary Cell Line Name': 'CELL_LINE_NAME', 'Compound': 'DRUG_NAME'}, inplace=True)
+raw_df.to_csv('response/response_CCLE.csv', index=False)
+```
+This was mapped to Cellosaurus IDs with the code in [utils/convert_to_cello.py](utils/convert_to_cello.py) to produce 
+``response_CCLE_cellosaurus.csv``. It was uploaded to Zenodo as `response_CCLE.csv`.
+
 It was reprocessed with CurveCurator: [CCLE_preprocess_raw_and_run_curvecurator.ipynb](response%2FCCLE_preprocess_raw_and_run_curvecurator.ipynb).
 The data was filtered such that all pEC50s lie in the measured range. The resulting file `CCLE.csv` was uploaded to Zenodo.
 

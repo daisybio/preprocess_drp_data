@@ -557,15 +557,15 @@ def preprocess_ccle_gex():
 def preprocess_drp_CCLE():
     print("Preprocessing CCLE response dataframe ...")
     drp = pd.read_csv("../CCLE/response/response_CCLE.csv")
-    len_before = len(drp)
-    drp = drp.groupby(["CELL_LINE_NAME", "DRUG_NAME"]).agg(collapse_ln_ic50s)
-    print(f"Collapsed {len_before - len(drp)}/{len_before} duplicated ln(IC50) values = {len(drp)} unique values now.")
-    drp = drp.reset_index()
     drp = drp.rename(columns={"CELL_LINE_NAME": "cell_line_name"})
     # get long format into wide format: rows should be cell line names (CELL_LINE_NAME column), columns should be drug names (DRUG_NAME column), values are in LN_IC50 column
     drp = drp.pivot(index="cell_line_name", columns="DRUG_NAME", values="LN_IC50")
     drp = drp.reset_index()
     renamed = {
+        "C32": "C32 [Human melanoma]",
+        "C3A": "Hep-G2/C3A",
+        "HARA": "HARA [Human squamous cell lung carcinoma]",
+        "HH": "HH [Human lymphoma]",
         "JM1": "JM-1",
     }
     drp = preprocess_df(df=drp, cl_col_name="cell_line_name", renamed_dict=renamed)
@@ -663,7 +663,6 @@ if __name__ == "__main__":
     cellosaurus = cellosaurus.fillna("")
     # create cellosaurus dictionary
     cellosaurus_ac_dict, cellosaurus_sy_dict, species_dict, cello_ac_to_id_dict = create_cl_dict(cellosaurus)
-    """
     # GDSC
     # map gene expression cell line names to cellosaurus IDs
     gex = preprocess_gex_gdsc()
@@ -697,7 +696,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/cnv/copy_number_variation_gistic_cellosaurus.csv",
     )
-    """
+    
     # map drug response cell line names to cellosaurus IDs
     drp_gdsc_1, cl_names = preprocess_drp_gdsc(dataset_name="GDSC1")
     map_to_cellosaurus(
@@ -725,7 +724,6 @@ if __name__ == "__main__":
     drp_gdsc_2.to_csv("../GDSC/response/response_GDSC2_cellosaurus.csv", index=True)
 
     #cellosaurus_sid_dict, species_dict = create_cl_dict_cell_passp(cellosaurus)
-
     # CCLE data
     # response
     ccle_drp = preprocess_drp_CCLE()
@@ -742,6 +740,7 @@ if __name__ == "__main__":
     ccle_drp = ccle_drp.rename(columns={"cell_line_name": "CELL_LINE_NAME"})
     ccle_drp = ccle_drp.set_index("cellosaurus_id")
     ccle_drp.to_csv("../CCLE/response/response_CCLE_cellosaurus.csv", index=True)
+
     # gene expression
     ccle = preprocess_ccle_gex()
     map_to_cellosaurus(
