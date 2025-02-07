@@ -227,3 +227,30 @@ The raw data was preprocessed and refitting with DrEvalPy and CurveCurator in:
 The resulting files `GDSC1.csv` and `GDSC2.csv` are currently in the Zenodo.
 
 
+## cell line names
+
+For the Naive models, we need the cell line names as features.
+```{python}
+import pandas as pd
+response_gdsc = pd.read_csv('response/GDSC1.csv') # pd.read_csv('response/GDSC2.csv')
+response_gdsc = response_gdsc[['cell_line_id', 'cell_line_name']]
+response_gdsc = response_gdsc.rename(columns={'cell_line_id': 'cellosaurus_id'})
+response_gdsc = response_gdsc.drop_duplicates()
+response_gdsc.to_csv('cell_line_names_v1.csv', index=False) # to_csv('cell_line_names_v2.csv', index=False)
+```
+**970** unique cell lines for GDSC1 and **969** unique cell lines for GDSC2.
+
+## drug names
+
+```{python}
+import pandas as pd
+response_gdsc = pd.read_csv('response/GDSC1.csv') # pd.read_csv('response/GDSC2.csv')
+response_gdsc = response_gdsc[['drug_id', 'DRUG_NAME']]
+response_gdsc = response_gdsc.rename(columns={'DRUG_NAME': 'drug_name'})
+response_gdsc = response_gdsc.drop_duplicates()
+response_gdsc.to_csv('drug_names_v1.csv', index=False) # to_csv('drug_names_v2.csv', index=False)
+```
+**378** unique drugs for GDSC1 and **288** unique drugs for GDSC2.
+
+
+

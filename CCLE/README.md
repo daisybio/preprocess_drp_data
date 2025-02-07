@@ -187,13 +187,35 @@ This was mapped to Cellosaurus IDs with the code in [utils/convert_to_cello.py](
 It was reprocessed with CurveCurator: [CCLE_preprocess_raw_and_run_curvecurator.ipynb](response%2FCCLE_preprocess_raw_and_run_curvecurator.ipynb).
 The data was filtered such that all pEC50s lie in the measured range. The resulting file `CCLE.csv` was uploaded to Zenodo.
 
-The CTRP screens are larger:
-- CTRPv1: 
-- CTRPv2: 907 cell lines, 545 drugs. 
+## cell line names
 
+For the Naive models, we need the cell line names as features.
+```{python}
+import pandas as pd
+response_ccle = pd.read_csv('response/CCLE.csv')
+response_ccle = response_ccle[['cell_line_id', 'cell_line_name']]
+response_ccle = response_ccle.rename(columns={'cell_line_id': 'cellosaurus_id'})
+response_ccle = response_ccle.drop_duplicates()
+response_ccle.to_csv('cell_line_names.csv', index=False)
+```
+**503** unique cell lines.
 
+## drug names
+
+```{python}
+import pandas as pd
+response_ccle = pd.read_csv('response/CCLE.csv')
+response_ccle = response_ccle[['drug_id', 'Compound']]
+response_ccle = response_ccle.rename(columns={'Compound': 'drug_name'})
+response_ccle = response_ccle.drop_duplicates()
+response_ccle.to_csv('drug_names.csv', index=False)
+```
+**24** unique drugs.
 
 ## Gene lists
 
+TODO: document
+
 ## Drug fingerprints
 
+TODO: document
