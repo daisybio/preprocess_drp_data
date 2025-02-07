@@ -214,7 +214,16 @@ Proteomics Data (DIA-MS) (averaged intensities and averaged z-scores over the re
 
 ## Response
 
-There are two response datasets available from https://www.cancerrxgene.org/downloads/bulk_download, one for GDSC1, one for GDSC2. The available files include the original fitted dose response data as well as a the raw data.
-The preprocessing and refitting pipeline with DrEvalPy and CurveCurator is provided as two separate jupyter notebook files in the response subfolder.
+There are two response datasets available from https://www.cancerrxgene.org/downloads/bulk_download, one for GDSC1, one for GDSC2. 
+The available files include the original fitted dose response data as well as the raw data.
+
+The preprocessed data was mapped with the code in utils/convert_to_cello.py (`preprocess_drp_gdsc(), map_to_cellosaurus(), post_process_drp_gdsc()`).
+The resulting files are currently in the Zenodo as `response_GDSC1.csv` and `response_GDSC2.csv`.
+
+The raw data was preprocessed and refitting with DrEvalPy and CurveCurator in: 
+- [GDSC1_preprocess_raw_and_run_curvecurator.ipynb](response%2FGDSC1_preprocess_raw_and_run_curvecurator.ipynb)
+- [GDSC2_preprocess_raw_and_run_curvecurator.ipynb](response%2FGDSC2_preprocess_raw_and_run_curvecurator.ipynb)
+
+The resulting files `GDSC1.csv` and `GDSC2.csv` are currently in the Zenodo.
 
 

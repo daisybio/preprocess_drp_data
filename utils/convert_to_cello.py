@@ -164,8 +164,9 @@ def preprocess_gex_gdsc():
         "ML-1": "ML-1 [Human thyroid carcinoma]",
         "MS-1": "MS-1 [Human lung carcinoma]",
         "NOS-1": "NOS-1 [Human osteosarcoma]",
-        "PC-3 [JPC-3]": "PC-3",
+        "PC-3 [JPC-3]": "PC-3 [Human lung carcinoma]",
         "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "RH-1": "EW-8",
         "SAT": "SAT [Human HNSCC]",
         "TK": "TK [Human B-cell lymphoma]",
     }
@@ -195,6 +196,7 @@ def preprocess_methylation_gdsc():
         "NO-10": "Onda 10",
         "NTERA-S-CL-D1": "NT2-D1",
         "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "RH-1": "EW-8",
         "HUO-3N1": "HuO-3N1",
         "CAR-1": "CaR-1",
         "NOS-1": "NOS-1 [Human osteosarcoma]",
@@ -208,7 +210,7 @@ def preprocess_methylation_gdsc():
         "RERF-LC-SQ1": "RERF-LC-Sq1",
         "SAT": "SAT [Human HNSCC]",
         "TK": "TK [Human B-cell lymphoma]",
-        "PC-3_JPC-3": "PC-3",
+        "PC-3_JPC-3": "PC-3 [Human lung carcinoma]",
     }
     methylation = preprocess_df(df=methylation, cl_col_name="CELL_LINE_NAME", renamed_dict=renamed)
     return methylation
@@ -247,23 +249,24 @@ def preprocess_cnv_gdsc():
     print("Preprocessing copy number variation dataframe ...")
     cnv = pd.read_csv("../GDSC/cnv/copy_number_variation_gistic.csv", index_col=0)
     renamed = {
-        "JM1": "JM-1",
-        "HT55": "HT-55",
-        "K2": "K2 [Human melanoma]",
-        "MS-1": "MS-1 [Human lung carcinoma]",
         "C32": "C32 [Human melanoma]",
-        "OMC-1": "OMC-1 [Human cervical carcinoma]",
-        "NOS-1": "NOS-1 [Human osteosarcoma]",
-        "TK": "TK [Human B-cell lymphoma]",
-        "SAT": "SAT [Human HNSCC]",
-        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
-        "TALL-1": "TALL-1 [Human adult T-ALL]",
-        "ML-1": "ML-1 [Human thyroid carcinoma]",
-        "KS-1": "KS-1 [Human glioblastoma]",
-        "HARA": "HARA [Human squamous cell lung carcinoma]",
-        "HH": "HH [Human lymphoma]",
-        "Hep3B2-1-7": "Hep 3B2.1-7",
         "G-292-Clone-A141B1": "G-292 clone A141B1",
+        "HARA": "HARA [Human squamous cell lung carcinoma]",
+        "Hep3B2-1-7": "Hep 3B2.1-7",
+        "HH": "HH [Human lymphoma]",
+        "HT55": "HT-55",
+        "JM1": "JM-1",
+        "K2": "K2 [Human melanoma]",
+        "KS-1": "KS-1 [Human glioblastoma]",
+        "ML-1": "ML-1 [Human thyroid carcinoma]",
+        "MS-1": "MS-1 [Human lung carcinoma]",
+        "NOS-1": "NOS-1 [Human osteosarcoma]",
+        "OMC-1": "OMC-1 [Human cervical carcinoma]",
+        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "RH-1": "EW-8",
+        "SAT": "SAT [Human HNSCC]",
+        "TALL-1": "TALL-1 [Human adult T-ALL]",
+        "TK": "TK [Human B-cell lymphoma]",
     }
     cnv = preprocess_df(df=cnv, cl_col_name="CELL_LINE_NAME", renamed_dict=renamed)
     return cnv
@@ -290,7 +293,7 @@ def preprocess_binarized_drp_gdsc():
         "HARA": "HARA [Human squamous cell lung carcinoma]",
         "KS-1": "KS-1 [Human glioblastoma]",
         "ML-1": "ML-1 [Human thyroid carcinoma]",
-        "PC-3 [JPC-3]": "PC-3",
+        "PC-3 [JPC-3]": "PC-3 [Human lung carcinoma]",
         "OMC-1": "OMC-1 [Human cervical carcinoma]",
         "TALL-1": "TALL-1 [Human adult T-ALL]",
     }
@@ -320,8 +323,9 @@ def preprocess_drp_gdsc(dataset_name):
             "NOS-1": "NOS-1 [Human osteosarcoma]",
             "NTERA-2-cl-D1": "NT2-D1",
             "OMC-1": "OMC-1 [Human cervical carcinoma]",
-            "PC-3_[JPC-3]": "PC-3",
+            "PC-3_[JPC-3]": "PC-3 [Human lung carcinoma]",
             "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+            "RH-1": "EW-8",
             "SAT": "SAT [Human HNSCC]",
             "TALL-1": "TALL-1 [Human adult T-ALL]",
             "TK": "TK [Human B-cell lymphoma]",
@@ -344,7 +348,7 @@ def preprocess_drp_gdsc(dataset_name):
             "NOS-1": "NOS-1 [Human osteosarcoma]",
             "NTERA-2-cl-D1": "NT2-D1",
             "OMC-1": "OMC-1 [Human cervical carcinoma]",
-            "PC-3_[JPC-3]": "PC-3",
+            "PC-3_[JPC-3]": "PC-3 [Human lung carcinoma]",
             "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
             "SAT": "SAT [Human HNSCC]",
             "TALL-1": "TALL-1 [Human adult T-ALL]",
@@ -366,103 +370,10 @@ def post_process_drp_gdsc(drp, matched_cell_lines, cello_id_to_ac_dict):
     cl_names = [cello_id_to_ac_dict.get(row["cellosaurus_id"]) for index, row in drp.iterrows()]
     drp["cell_line_name"] = cl_names
     drp = drp.drop(columns=["CELL_LINE_NAME"])
-    drp = drp.set_index(["cellosaurus_id", "cell_line_name"])
+    drp = drp.rename(columns={"cell_line_name": "CELL_LINE_NAME"})
+    drp = drp.set_index(["cellosaurus_id", "CELL_LINE_NAME"])
     drp = drp.sort_index()
     return drp
-
-
-"""
-def preprocess_gdsc_1_curves():
-    # read in drug response dataframe
-    print("Preprocessing drug response dataframe ...")
-    drp = pd.read_csv("../GDSC/response/curves_GDSC1.txt", sep="\t")
-    # drop all columns except 'Name', 'pEC50', 'Curve Regulation'
-    drp = drp[["Name", "pEC50", "Curve Regulation"]]
-    # filter out all rows where 'Curve Regulation' is not 'down'
-    print(f"Before filtering: {len(drp)} rows")
-    drp = drp[drp["Curve Regulation"] == "down"]
-    print(f"After filtering: {len(drp)} rows")
-    drp = drp.reset_index(drop=True)
-    # split Name into 'DRUG_NAME' and 'cell_line_name' columns
-    # Name column: replace last space with '|'
-    drp["Name"] = drp["Name"].str.rsplit(" ", n=1).str[0] + "|" + drp["Name"].str.rsplit(" ", n=1).str[1]
-    drp[["DRUG_NAME", "cell_line_name"]] = drp["Name"].str.split("|", n=1, expand=True)
-    drp = drp.drop(columns=["Name", "Curve Regulation"])
-    # get long format into wide format: rows should be cell line names (CELL_LINE_NAME column), columns should be drug names (DRUG_NAME column), values are in LN_IC50 column
-    drp = drp.pivot(index="cell_line_name", columns="DRUG_NAME", values="pEC50")
-    # replace the cell line names, e.g., 'RCM-1' with 'RCM-1 [Human rectal adenocarcinoma]', 'C32' with 'C32 [Human melanoma]'
-    renamed = {
-        "JM1": "JM-1",
-        "HT55": "HT-55",
-        "K2": "K2 [Human melanoma]",
-        "MS-1": "MS-1 [Human lung carcinoma]",
-        "C32": "C32 [Human melanoma]",
-        "G-292-Clone-A141B1": "G-292 clone A141B1",
-        "HARA": "HARA [Human squamous cell lung carcinoma]",
-        "HH": "HH [Human lymphoma]",
-        "Hep3B2-1-7": "Hep 3B2.1-7",
-        "Hs-633T": "Hs 633.T",
-        "KS-1": "KS-1 [Human glioblastoma]",
-        "ML-1": "ML-1 [Human thyroid carcinoma]",
-        "NOS-1": "NOS-1 [Human osteosarcoma]",
-        "NTERA-2-cl-D1": "NT2-D1",
-        "OMC-1": "OMC-1 [Human cervical carcinoma]",
-        "PC-3_[JPC-3]": "PC-3",
-        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
-        "SAT": "SAT [Human HNSCC]",
-        "TALL-1": "TALL-1 [Human adult T-ALL]",
-        "TK": "TK [Human B-cell lymphoma]",
-    }
-    drp = drp.reset_index()
-    drp = preprocess_df(df=drp, cl_col_name="cell_line_name", renamed_dict=renamed)
-    return drp
-"""
-
-
-def preprocess_gdsc_2_curves():
-    # read in drug response dataframe
-    print("Preprocessing drug response dataframe ...")
-    drp = pd.read_csv("../GDSC/response/curves_GDSC2.txt", sep="\t")
-    # drop all columns except 'Name', 'pEC50', 'Curve Regulation'
-    drp = drp[["Name", "pEC50", "Curve Regulation"]]
-    # filter out all rows where 'Curve Regulation' is not 'down'
-    print(f"Before filtering: {len(drp)}")
-    drp = drp[drp["Curve Regulation"] == "down"]
-    print(f"After filtering: {len(drp)}")
-    drp = drp.reset_index(drop=True)
-    # split Name into 'DRUG_NAME' and 'cell_line_name' columns
-    # Name column: replace last space with '|'
-    drp["Name"] = drp["Name"].str.rsplit(" ", n=1).str[0] + "|" + drp["Name"].str.rsplit(" ", n=1).str[1]
-    drp[["DRUG_NAME", "cell_line_name"]] = drp["Name"].str.split("|", n=1, expand=True)
-    drp = drp.drop(columns=["Name", "Curve Regulation"])
-    # get long format into wide format: rows should be cell line names (CELL_LINE_NAME column), columns should be drug names (DRUG_NAME column), values are in LN_IC50 column
-    drp = drp.pivot(index="cell_line_name", columns="DRUG_NAME", values="pEC50")
-    renamed = {
-        "JM1": "JM-1",
-        "HT55": "HT-55",
-        "K2": "K2 [Human melanoma]",
-        "MS-1": "MS-1 [Human lung carcinoma]",
-        "C32": "C32 [Human melanoma]",
-        "G-292-Clone-A141B1": "G-292 clone A141B1",
-        "HARA": "HARA [Human squamous cell lung carcinoma]",
-        "HH": "HH [Human lymphoma]",
-        "Hep3B2-1-7": "Hep 3B2.1-7",
-        "Hs-633T": "Hs 633.T",
-        "KS-1": "KS-1 [Human glioblastoma]",
-        "ML-1": "ML-1 [Human thyroid carcinoma]",
-        "NOS-1": "NOS-1 [Human osteosarcoma]",
-        "NTERA-2-cl-D1": "NT2-D1",
-        "OMC-1": "OMC-1 [Human cervical carcinoma]",
-        "PC-3_[JPC-3]": "PC-3",
-        "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
-        "SAT": "SAT [Human HNSCC]",
-        "TALL-1": "TALL-1 [Human adult T-ALL]",
-        "TK": "TK [Human B-cell lymphoma]",
-    }
-    drp = drp.reset_index()
-    drp = preprocess_df(df=drp, cl_col_name="cell_line_name", renamed_dict=renamed)
-    return drp
-
 
 def preprocess_sanger_ccle_gex(tpm=True):
     # read in gene expression dataframe
@@ -518,6 +429,7 @@ def preprocess_sanger_proteomcis():
         "OMC-1": "OMC-1 [Human cervical carcinoma]",
         "PC-3_[JPC-3]": "PC-3 [Human lung carcinoma]",
         "RCM-1": "RCM-1 [Human rectal adenocarcinoma]",
+        "RH-1": "EW-8",
         "SAT": "SAT [Human HNSCC]",
         "TALL-1": "TALL-1 [Human adult T-ALL]",
         "TK": "TK [Human B-cell lymphoma]",
@@ -663,6 +575,7 @@ if __name__ == "__main__":
     cellosaurus = cellosaurus.fillna("")
     # create cellosaurus dictionary
     cellosaurus_ac_dict, cellosaurus_sy_dict, species_dict, cello_ac_to_id_dict = create_cl_dict(cellosaurus)
+    """
     # GDSC
     # map gene expression cell line names to cellosaurus IDs
     gex = preprocess_gex_gdsc()
@@ -696,7 +609,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/cnv/copy_number_variation_gistic_cellosaurus.csv",
     )
-    
+    """
     # map drug response cell line names to cellosaurus IDs
     drp_gdsc_1, cl_names = preprocess_drp_gdsc(dataset_name="GDSC1")
     map_to_cellosaurus(
@@ -722,7 +635,7 @@ if __name__ == "__main__":
     )
     drp_gdsc_2 = post_process_drp_gdsc(drp_gdsc_2, matched_cell_lines, cello_ac_to_id_dict)
     drp_gdsc_2.to_csv("../GDSC/response/response_GDSC2_cellosaurus.csv", index=True)
-
+    """
     #cellosaurus_sid_dict, species_dict = create_cl_dict_cell_passp(cellosaurus)
     # CCLE data
     # response
@@ -805,3 +718,4 @@ if __name__ == "__main__":
     # export renamed cell lines to csv file
     renamed_cell_lines_df = pd.DataFrame.from_dict(renamed_cell_lines, orient="index", columns=["cell_line_name"])
     renamed_cell_lines_df.to_csv("../mapping/renamed_cell_lines.csv")
+    """
