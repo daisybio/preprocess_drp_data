@@ -1,0 +1,210 @@
+old_name,new_name,pubchem_id
+BYL-719,Alpelisib,56649450
+MLN-4924,Pevonedistat,16720766
+pevonedistat,Pevonedistat,16720766
+ibrutinib,Ibrutinib,24821094
+GW843682X,GW-843682X,9826308
+GSK525762A,I-BET-762,46943432
+sirolimus,Rapamycin,5284616
+masitinib,Masitinib,10074640
+YK 4-279,YK-4-279,44632017
+PFI3,PFI-3,78243717
+tretinoin,Tretinoin,444795
+ATRA,Tretinoin,444795
+tamoxifen,Tamoxifen,2733526
+etoposide,Etoposide,36462
+tivozanib,Tivozanib,9911830
+dabrafenib,Dabrafenib,44462760
+EX-527,Selisistat,5113032
+17-AAG,Tanespimycin,6505803
+tanespimycin,Tanespimycin,6505803
+quizartinib,Quizartinib,24889392
+belinostat,Belinostat,6918638
+lenalidomide,Lenalidomide,216326
+bosutinib,Bosutinib,5328940
+CI-1033,Canertinib,156414
+canertinib,Canertinib,156414
+MK 1775,MK-1775,24856436
+oxaliplatin,Oxaliplatin,9887053
+JQ1,JQ-1,46907787
+selumetinib,Selumetinib,10127622
+AZD6244,Selumetinib,10127622
+cediranib,Cediranib,9933475
+rucaparib,Rucaparib,9931954
+CHEMBL1222381,Neuronal differentiation inducer III,19582717
+neuronal differentiation inducer III,Neuronal differentiation inducer III,19582717
+serdemetan,Serdemetan,11609586
+AZD0530,Saracatinib,10302451
+saracatinib,Saracatinib,10302451
+NSC19630,MIRA-1,227681
+erlotinib,Erlotinib,176870
+AZD7545,AZD-7545,16741245
+TGX221,TGX-221,9907093
+vismodegib,Vismodegib,24776445
+TW 37,TW-37,11455910
+PD-0332991,Palbociclib,5330286
+MST-312,Telomerase Inhibitor IX,10385095
+vorinostat,Vorinostat,5311
+veliparib,Veliparib,11960529
+tozasertib,Tozasertib,5494449
+VX-680,Tozasertib,5494449
+azacitidine,Azacitidine,9444
+5-azacytidine,Azacitidine,9444
+mitomycin,Mitomycin-C,5746
+gefitinib,Gefitinib,123631
+gemcitabine,Gemcitabine,60750
+bortezomib,Bortezomib,387447
+XAV939,XAV-939,135418940
+piperlongumine,Piperlongumine,637858
+alvocidib,Flavopiridol,5287969
+sunitinib,Sunitinib,5329102
+trametinib,Trametinib,11707110
+axitinib,Axitinib,6450551
+CAL-101,Idelalisib,11625818
+vandetanib,Vandetanib,3081361
+BX795,BX-795,10077147
+parthenolide,Parthenolide,7251185
+GSK319347A,CAY10576,11626927
+fluorouracil,5-Fluorouracil,3385
+tubastatin A,Tubastatin A,49850262
+bexarotene,Bexarotene,82146
+nilotinib,Nilotinib,644241
+alisertib,Alisertib,24771867
+PLX4720,PLX-4720,24180719
+imatinib,Imatinib,5291
+LBH-589,Panobinostat,6918837
+FK866,Daporinad,6914657
+daporinad,Daporinad,6914657
+cabozantinib,Cabozantinib,25102847
+navitoclax,Navitoclax,24978538
+pemetrexed,Pemetrexed,135410875
+dinaciclib,Dinaciclib,46926350
+temozolomide,Temozolomide,5394
+AZD6094,Savolitinib,68289010
+BIRB-796,Doramapimod,156422
+pazopanib,Pazopanib,10113978
+ABT-199,Venetoclax,49846579
+topotecan,Topotecan,60700
+TG-101348,Fedratinib,16722836
+paclitaxel,Paclitaxel,36314
+crizotinib,Crizotinib,11626560
+PF-2341066,Crizotinib,11626560
+NVP-BEZ235,Dactolisib,11977753
+BEZ235,Dactolisib,11977753
+NVP-AUY922,Luminespib,135539077
+teniposide,Teniposide,452548
+AZD8931,Sapitinib,11488320
+linifanib,Linifanib,11485656
+foretinib,Foretinib,42642645
+Merck60,JQ12,6918878
+PD0325901,PD-0325901,9826528
+AZD5363,Capivasertib,25227436
+nutlin-3,Nutlin-3,216345
+temsirolimus,Temsirolimus,6918289
+NVP-TAE684,TAE684,16038120
+I-BET151,I-BET-151,52912189
+GDC-0941,Pictilisib,17755052
+sorafenib,Sorafenib,216239
+dasatinib,Dasatinib,3062316
+lapatinib,Lapatinib,208908
+docetaxel,Docetaxel,148124
+afatinib,Afatinib,10184653
+fulvestrant,Fulvestrant,104741
+doxorubicin,Doxorubicin,31703
+methotrexate,Methotrexate,126941
+ruxolitinib,Ruxolitinib,25126798
+PF-543,Sphingosine Kinase 1 Inhibitor II,66577038
+dacarbazine,Dacarbazine,135398738
+cyclophosphamide,Cyclophosphamide,2907
+YM-155,Sepantronium bromide,11178236
+olaparib,Olaparib,23725625
+AGK2,AGK-2,2130404
+PRL-3 inhibitor I,PRL-3 Inhibitor I,73707371
+linsitinib,Linsitinib,11640390
+nelarabine,Nelarabine,3011155
+entinostat,Entinostat,4261
+ASN 05257430,ML083,650361
+CHEMBL374350,ML029,2858523
+nintedanib,Nintedanib,135423438
+BIBF-1120,Nintedanib,135423438
+ABT737,ABT-737,11228183
+(-)-gallocatechin-3-monogallate,(-)-Gallocatechin gallate,199472
+16-beta-bromoandrosterone,16beta-Bromoandrosterone,16219061
+"1S,3R-RSL-3","(1S,3R)-Rsl3",1750826
+"2,4-dideoxy-DC-45-A2",BRD-K41087962-001-01-7,73707381
+2-bromopyruvate,3-Bromopyruvic acid,70684
+2-deoxyglucose,2-Deoxy-D-arabino-hexopyranose,439268
+4-methylfasudil,"5-(1,4-Diazepan-1-ylsulfonyl)-4-methylisoquinoline",9951687
+5-benzyl-9-tert-butyl-paullone,CHEMBL575106,44818427
+968,Glutaminase C-IN-1,3099980
+AA-COCF3,Aacocf3,5280436
+BRD-A86708339,TCMDC-125552,2871966
+BRD-K03536150,SCHEMBL16273428,3543504
+BRD-K07442505,BAM7,3101542
+BRD-K20514654,BRD-K20514654-001-01-8,73707440
+BRD-K29313308,BRD3308,72734382
+BRD-K35604418,mim1,135875424
+BRD-K63431240,BRD1240,54618771
+BRD-K64610608,MLS003179190,44489675
+BRD-K70511574,HMS3654N14,54143018
+BRD-K79669418,CHEMBL5275075,171352865
+BRD-K88742110,PCI-34051,24753719
+BRD0713,"(2R,3R,4S)-4-(hydroxymethyl)-3-phenyl-1-propylazetidine-2-carbonitrile",71500434
+BRD1812,ICG-001,11238147
+BRD2572,"1-[(1R,5S)-7-phenyl-6-propyl-3,6-diazabicyclo[3.1.1]heptan-3-yl]ethanone",71500437
+BRD4046,"[(2S,3R,4R)-4-(aminomethyl)-3-phenyl-1-propylazetidin-2-yl]methanol",71500435
+BRD4372,"1-[(1S,2aS,8bS)-1-(hydroxymethyl)-2-propyl-1,2a,3,8b-tetrahydroazeto[2,3-c]quinolin-4-yl]ethanone",71500765
+BRD4470,BRD-4470,135787362
+BRD55319,BRD-K53855319-001-01-2,44240264
+BRD5586,"5-phenyl-1,7-dihydrotetrazolo[1,5-a]pyrimidine",727137
+BRD63610,BRD-K85563610-001-01-0,9543513
+BRD6368,BRD-K14696368-001-01-8,16759925
+BRD6430,Sonidegib,24775005
+BRD6825,BRD-96825,54666404
+BRD7137,"5H-quinolino[8,7-c][1,2]benzothiazine 6,6-dioxide",659101
+BRD8097,"(1S,5R)-3-methylsulfonyl-7-phenyl-6-propyl-3,6-diazabicyclo[3.1.1]heptane",71500438
+BRD8418,"(1R,5S)-7-phenyl-6-propyl-3,6-diazabicyclo[3.1.1]heptane",71500436
+BRD8958,C646,1285940
+"Brivanib, BMS-540215",Brivanib:BMS-540215,Brivanib:BMS-540215
+"CAP-232, TT-232, TLN-232",CAP-232:TT-232:TLN-232,CAP-232:TT-232:TLN-232
+CID 2853753,"2-(1,2-Dihydroimidazo[1,2-a]benzimidazol-4-yl)-1-(4-phenylphenyl)ethanone",2853753
+Cetuximab,C225,14122979
+Compound 110,BRD-K03618428-001-01-3,24905203
+Compound 11e,VX-11e,11634725
+Compound 12,BRD-K40892394-001-01-9,9797857
+Compound 2,BCATc Inhibitor 2,6914573
+Compound 4,PTP1B-IN-3,24857885
+Compound 44,CHEMBL5270701,5758458
+DC-45-A2,BRD-K79983625-001-01-1,73707376
+ISOX,Bml-281,24951314
+KRAS (G12C) Inhibitor-12,K-Ras(G12C) inhibitor 12,73555129
+ML334 diastereomer,BRD-K93367411-001-03-3,40482356
+MPS-1-IN-1,Mps1-IN-1,25195352
+"MetAP2 Inhibitor, A832234",MetAP2 Inhibitor:A832234,MetAP2 Inhibitor:A832234
+Nutlin-3a (-),Rebemadlin,11433190
+P-0850,BRAF inhibitor,53438230
+PP-30,BRD-K30677119-001-01-0,73707372
+Picolinici-acid,Picolinic acid,1018
+QW-BI-011,BRD-4770,72193870
+SR-II-138A,Rohinitib,49793307
+T-5345967,ML-031,2113511
+TTNBP,Arotinoid acid,5289501
+VAF-347,Vaf347,10172275
+Venotoclax,Venetoclax,49846579
+YL54,BRD-K58306044-001-01-3,73707438
+ascorbate (vitamin C),Ascorbic acid,54670067
+ceranib-2,CHEMBL4788167,72193861
+compound 1B,Dnmdp,2874250
+"eEF2K Inhibitor, A-484954",a-484954,14998470
+erastin-A8,SCHEMBL4462685,44205649
+m-3M3-FBS,Phospholipase,761523
+"racemic-2,4-dideoxy-DC-45-A2",SCHEMBL18710180,126757334
+tipifarnib-P1,Tipifarnib S enantiomer,9935249
+tipifarnib-P2,Tipifarnib,159324
+erismodegib,Sonidegib,24775005
+CAY10603,Bml-281,24951314
+BRD4770,BRD-4770,72193870
+ML031,ML-031,2113511
+JNK-9L,JNK inhibitor 9l,25222038
+KIN001-260,Potassium;azide;iodide,157400995
+VNLG/124,VNLG-124,24894414
