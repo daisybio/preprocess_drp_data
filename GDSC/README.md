@@ -203,10 +203,18 @@ mapping_df_dic = mapping_df[['Automatic_MS_filename','Cell_line']].set_index('Au
 normalized_file_df.columns = normalized_file_df.columns.map(mapping_df_dic)
 normalized_file_df.to_csv('mapped_protein_matrix_maxlfq_diann-normalised.csv',index=False)
 ```
-
-The protein expression table was made with [sanger_procan_fp.ipynb](proteomics/sanger_procan_fp.ipynb) and then mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
+<!---
+The protein expression table was made with [sanger_procan_fp.ipynb](proteomics/sanger_procan_fp.ipynb)
+-->
+The IDs were mapped to cellosaurus IDs with the code in utils/convert_to_cello.py.
 
 This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
+
+The proteomics models currently subsequently perform log10 transformation and median-centering, filter the top 1000 
+most complete proteins (fewest NA over cell lines) and do missing value imputation with a down-shifted mean and shrunken standard 
+deviation from the sample distribution. The code on how to do this for the whole dataset is in [sanger_procan_fp.ipynb](proteomics/sanger_procan_fp.ipynb).
+We did this in the package though, to ensure we only take the summary statistics of the train dataset for normalization 
+and imputation to avoid data leakage.
 
 Alternatively, processed data can be downloaded from [Sanger Cell Model Passports](https://cellmodelpassports.sanger.ac.uk/downloads): 
 Proteomics Data (DIA-MS) (averaged intensities and averaged z-scores over the replicates).

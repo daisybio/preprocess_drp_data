@@ -398,10 +398,11 @@ def preprocess_sanger_sanger_gex(tpm=True):
 def preprocess_sanger_proteomcis():
     # read in proteomics dataframe
     print("Preprocessing proteomics dataframe ...")
-    prot = pd.read_csv("../SangerCellModelPassports/proteomics/protein_expression_table.tsv", sep="\t")
+    prot = pd.read_csv("../SangerCellModelPassports/proteomics/mapped_protein_matrix_maxlfq_diann-normalised.csv", index_col=0)
+    id_mapping_df = pd.read_csv('../SangerCellModelPassports/proteomics/uniprot_id_to_gene_name_mapping.tsv', sep='\t')
+    prot.index = prot.index.map(id_mapping_df.set_index('from')['to'].to_dict())
     control_runs = prot.columns[prot.columns.str.startswith("Control_HEK293T")].tolist()
     prot = prot.drop(columns=control_runs)
-    prot = prot.set_index("Unnamed: 0")
     prot = prot.T
     prot = prot.reset_index(names='cell_line_name')
     # sort by cell line name
@@ -575,7 +576,7 @@ if __name__ == "__main__":
     cellosaurus = cellosaurus.fillna("")
     # create cellosaurus dictionary
     cellosaurus_ac_dict, cellosaurus_sy_dict, species_dict, cello_ac_to_id_dict = create_cl_dict(cellosaurus)
-    """
+
     # GDSC
     # map gene expression cell line names to cellosaurus IDs
     gex = preprocess_gex_gdsc()
@@ -609,7 +610,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../GDSC/cnv/copy_number_variation_gistic_cellosaurus.csv",
     )
-    """
+    
     # map drug response cell line names to cellosaurus IDs
     drp_gdsc_1, cl_names = preprocess_drp_gdsc(dataset_name="GDSC1")
     map_to_cellosaurus(
@@ -635,7 +636,7 @@ if __name__ == "__main__":
     )
     drp_gdsc_2 = post_process_drp_gdsc(drp_gdsc_2, matched_cell_lines, cello_ac_to_id_dict)
     drp_gdsc_2.to_csv("../GDSC/response/response_GDSC2_cellosaurus.csv", index=True)
-    """
+    
     #cellosaurus_sid_dict, species_dict = create_cl_dict_cell_passp(cellosaurus)
     # CCLE data
     # response
@@ -696,7 +697,7 @@ if __name__ == "__main__":
         cello_ac_to_id_dict,
         "../CCLE/proteomics/proteomics_cellosaurus.csv",
     )
-    
+
     sanger_prot = preprocess_sanger_proteomcis()
     map_to_cellosaurus(
         sanger_prot,
@@ -718,4 +719,4 @@ if __name__ == "__main__":
     # export renamed cell lines to csv file
     renamed_cell_lines_df = pd.DataFrame.from_dict(renamed_cell_lines, orient="index", columns=["cell_line_name"])
     renamed_cell_lines_df.to_csv("../mapping/renamed_cell_lines.csv")
-    """
+
