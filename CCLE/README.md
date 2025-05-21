@@ -24,7 +24,7 @@ Furthermore, there is raw Microarray data available at [GEO](https://www.google.
 ### Re-processing the RNAseq data with nf-core/rnaseq to get gene-level TPMs
 Because none of these matrices agree with each other, we have decided to **re-process the raw RNAseq data from scratch.**
 
-The CCLE cell lines were profiles using RNA-seq by [Ghandi et al. in 2019](10.1038/s41586-019-1186-3). 
+The CCLE cell lines were profiles using RNA-seq by [Ghandi et al. in 2019](doi.org/10.1038/s41586-019-1186-3). 
 The data is available via the NCBI SRA Run selector as BioProject PRJNA523380. 
 From here, all RNA-seq metadata and the SRR accession numbers for the runs were downloaded.
 

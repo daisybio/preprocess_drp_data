@@ -36,7 +36,7 @@ GDSC/response/response_GDSC1.csv
 GDSC/response/response_GDSC2.csv
 
 mapping/cellosaurus_01_2024.csv.zip
-
+utils/DIPK_features/PreprocessingC/drugs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
