@@ -15,9 +15,13 @@ From the PDTXs, short term cultures of cancer cells were established (PDTCs) and
 
 All files can be retrieved from https://figshare.com/s/4a3f6bc543e5ba85834c. 
 
-Because the raw data is only available for the drug responses, we could only use the processed data provided in the figshare repository for the other omics.
-They were postprocessed with [process_bruna_data.ipynb](process_bruna_data.ipynb) to generate the final files used for modeling currently in the Zenodo.
+Except for the drug responses, we use the processed data provided in the figshare repository.
+The omics files were postprocessed with [process_bruna_data.ipynb](process_bruna_data.ipynb) to generate the final files used for modeling currently in the Zenodo.
 
 ## Response
 The drug response data is provided in the file `RawDataDrugsSingleAgents.txt`.
 It was reprocessed with CurveCurator in the notebook [Bruna_preprocess_raw_and_run_curvecurator.ipynb](response/Bruna_preprocess_raw_and_run_curvecurator.ipynb).
+
+## Expression
+The microarray file downloaded is `ExpressionSamples.txt`. The raw files would be available at EGAS00001001913 
+but we chose to only re-process RNAseq data, so we worked with the provided values.
