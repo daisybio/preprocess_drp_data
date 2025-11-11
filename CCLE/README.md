@@ -105,7 +105,7 @@ This data is **currently in Zenodo for GDSC1, GDSC2, and CCLE**.
 From [DepMap](https://depmap.org/portal/data_page/?tab=allData): Methylation (RRBS), the data for the promoter CpG clusters was
 downloaded (CCLE_RRBS_TSS_CpG_clusters_20180614.txt). 
 
-This was preprocessed with [preprocess_methylation.R](methylation/preprocess_methylation.R). Here, the CpG cluster regions 
+This was preprocessed with [preprocess_methylation.py](methylation/preprocess_methylation.py). Here, the CpG cluster regions 
 were matched to the ones from GDSC such that they share their variables. This was done by finding the regions that overlap 
 most between the two datasets.
 

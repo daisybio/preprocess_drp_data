@@ -25,3 +25,24 @@ It was reprocessed with CurveCurator in the notebook [Bruna_preprocess_raw_and_r
 ## Expression
 The microarray file downloaded is `ExpressionSamples.txt`. The raw files would be available at EGAS00001001913 
 but we chose to only re-process RNAseq data, so we worked with the provided values.
+
+## Copy number variations
+The corresponding file is `CNASamples.txt`. We are reprocessing it with [GISTIC2.0](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-4-r41) using the [GenePattern server](https://cloud.genepattern.org/gp/pages/index.jsf). 
+The preparing code for GISTIC is in the Jupyter notebook.
+
+We used the Human Hg19 reference genome and uploaded the segmentation file and used the default settings. The results were 
+written to all_thresholded.by_genes.txt.
+The remaining preprocessing code for Zenodo is in the Jupyter notebook, too.
+
+## Mutation
+The corresponding file is `SNVsSamples.txt`. We converted the file to boolean values (code in notebook).
+
+## Methylation
+The corresponding file is `PromoterMethylationSamples.txt` (RRBS).
+It is just promoter methylation, so we do not have the locations on the chromosomes but gene names. One could, theoretically, 
+map this using a GTF file. But ultimately, we decided not to include the Methylation data in the Zenodo, because the values
+are not comparable (CpG vs. promoter methylation). Might do this at a later point in time. 
+
+## Cell line names, drug names
+See notebook, just extracted. For gene lists, see gene lists directory
+
