@@ -30,7 +30,7 @@ The other files were processed with [process_beataml_omics.ipynb](process_beatam
 The mapping file between all 3 modalities is stored in https://github.com/biodev/beataml2.0_data/raw/main/beataml_waves1to4_sample_mapping.xlsx
 
 
-### Response
+### Gene expression
 
 Gene Expression Values:
 https://github.com/biodev/beataml2.0_data/raw/main/beataml_waves1to4_norm_exp_dbgap.txt
@@ -39,5 +39,20 @@ https://github.com/biodev/beataml2.0_data/raw/main/beataml_waves1to4_norm_exp_db
 
 Mutation Values: 
 https://github.com/biodev/beataml2.0_data/raw/main/beataml_wes_wv1to4_mutations_dbgap.txt
+
+The processing steps are in the notebook but they have just measured 2294 genes. These genes do not have enough
+overlap with our gene lists. We therefore chose not to include this data.
+
+### Drug features
+See [drugs.ipynb](drugs.ipynb) for drug_smiles.csv and drug fingerprints.
+For the drug graphs and ChemBERTa embeddings go to drevalpy/datasets/featurizer/: 
+```{bash}
+python create_drug_graphs.py --data_path path_to_this_project BeatAML2
+```
+For the ChemBERTa embeddings: 
+```{bash}
+python create_drug_embeddings.py --data_path path_to_this_project BeatAML2
+```
+For MolGNet: 
 
 

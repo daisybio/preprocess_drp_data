@@ -46,3 +46,15 @@ are not comparable (CpG vs. promoter methylation). Might do this at a later poin
 ## Cell line names, drug names
 See notebook, just extracted. For gene lists, see gene lists directory
 
+## Drug features
+See [drugs.ipynb](drugs.ipynb) for drug_smiles.csv and drug fingerprints.
+For the drug graphs and ChemBERTa embeddings go to drevalpy/datasets/featurizer/: 
+```{bash}
+python create_drug_graphs.py --data_path path_to_this_project PDX_Bruna
+```
+For the ChemBERTa embeddings: 
+```{bash}
+python create_drug_embeddings.py --data_path path_to_this_project PDX_Bruna
+```
+For MolGNet: 
+
