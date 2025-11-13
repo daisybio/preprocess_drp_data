@@ -36,6 +36,13 @@ The remaining preprocessing code for Zenodo is in the Jupyter notebook, too.
 
 ## Mutation
 The corresponding file is `SNVsSamples.txt`. We converted the file to boolean values (code in notebook).
+The processing steps are in the notebook but they have just measured 7395 genes. These genes do not have enough
+overlap with our gene lists. We therefore chose not to include this data:
+```
+Missing landmark genes: 556/867
+Missing drug target genes: 138/242
+Missing paccman genes: 1212/1957
+```
 
 ## Methylation
 The corresponding file is `PromoterMethylationSamples.txt` (RRBS).

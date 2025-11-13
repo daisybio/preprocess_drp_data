@@ -41,7 +41,12 @@ Mutation Values:
 https://github.com/biodev/beataml2.0_data/raw/main/beataml_wes_wv1to4_mutations_dbgap.txt
 
 The processing steps are in the notebook but they have just measured 2294 genes. These genes do not have enough
-overlap with our gene lists. We therefore chose not to include this data.
+overlap with our gene lists. We therefore chose not to include this data:
+```
+Missing landmark genes: 760/867
+Missing drug target genes: 196/242
+Missing paccman genes: 1701/1957
+```
 
 ### Drug features
 See [drugs.ipynb](drugs.ipynb) for drug_smiles.csv and drug fingerprints.
