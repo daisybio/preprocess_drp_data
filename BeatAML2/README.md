@@ -59,5 +59,8 @@ For the ChemBERTa embeddings:
 python create_drug_embeddings.py --data_path path_to_this_project BeatAML2
 ```
 For MolGNet: 
-
+`MolGNet.pt` can be obtained from Zenodo https://doi.org/10.5281/zenodo.12633909 , put it into `data_path`. 
+```{bash}
+python create_molgnet_embeddings.py --data_path path_to_this_project --checkpoint MolGNet.pt BeatAML2
+```
 
