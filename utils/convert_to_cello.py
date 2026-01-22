@@ -571,6 +571,7 @@ def preprocess_reprocessed_ccle_gistic():
 
 
 if __name__ == "__main__":
+    # this is created with the script in utils/parse_cellosaurus.py
     cellosaurus = pd.read_csv("../mapping/cellosaurus_01_2024.csv")
     # replace all NaN values with empty strings
     cellosaurus = cellosaurus.fillna("")

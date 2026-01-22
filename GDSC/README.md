@@ -79,7 +79,7 @@ mut = mut[mut['effect'] != 'silent']
 # filter for 'gene_symbol' and 'model_id', introduce a new column: 'mutated' which is True everywhere
 mut = mut[['gene_symbol', 'model_id']]
 mut['mutated'] = True
-# mapping for sanger
+# mapping for sanger, created with the script in mapping/make_cellosaurus_csv.py
 cellosaurus = pd.read_csv("mapping/cellosaurus_01_2024.csv")
 cellosaurus = cellosaurus.fillna("")
 cellosaurus_sid_dict = {}

@@ -68,6 +68,7 @@ It was postprocessed with
 ```{python}
 import pandas as pd
 
+# this is created with the script in utils/parse_cellosaurus.py
 cellosaurus = pd.read_csv("mapping/cellosaurus_01_2024.csv")
 cellosaurus = cellosaurus.fillna("")
 id_to_ac_dict = dict(zip(cellosaurus["AC"], cellosaurus["ID"]))

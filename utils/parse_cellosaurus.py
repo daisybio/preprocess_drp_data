@@ -66,7 +66,7 @@ def get_cellosaurus_Db(
     cellosarus_df.index = cellosarus_df["AC"]
     # remove AC column
     cellosarus_df.drop(["AC"], axis=1, inplace=True)
-    cellosarus_df.to_csv("~/Downloads/cellosaurus_01_2024.csv")
+    cellosarus_df.to_csv("../mapping/cellosaurus_01_2024.csv")
 
 
 get_cellosaurus_Db()

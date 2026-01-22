@@ -1,6 +1,7 @@
 library(data.table)
 library(stringr)
 
+# this is created with the script in utils/parse_cellosaurus.py
 mapping <- fread('../../mapping/cellosaurus_01_2024.csv')
 cell_line_names <- fread('cell_line_names.csv')
 mapping_short <- mapping[, c("AC", "DR")]
